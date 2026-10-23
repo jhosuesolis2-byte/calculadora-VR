@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora - Alexander GMB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: #181818;
+            color: #cccccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .calc-container {
+            width: 100%;
+            max-width: 420px;
+            background-color: #1f1f1f;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border: 1px solid #333333;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Encabezado */
+        .header {
+            background-color: #252526;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #2d2d2d;
+        }
+
+        .brand-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-svg {
+            width: 46px;
+            height: 46px;
+            flex-shrink: 0;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-title {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .company-subtitle {
+            color: #90c238;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .mode-badge {
+            background-color: #2d2d2d;
+            color: #888;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #3a3a3a;
+        }
+
+        /* Pantalla */
+        .display-area {
+            background-color: #181818;
+            padding: 24px 20px 16px 20px;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 110px;
+            border-bottom: 1px solid #282828;
+        }
+
+        .history {
+            color: #777777;
+            font-size: 0.95rem;
+            min-height: 24px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .current-input {
+            color: #ffffff;
+            font-size: 2.2rem;
+            font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-top: 4px;
+        }
+
+        /* Botones */
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            padding: 16px;
+            background-color: #1f1f1f;
+        }
+
+        .btn {
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+            border: 1px solid #383838;
+            border-radius: 6px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            height: 54px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn:hover {
+            background-color: #383838;
+            border-color: #4a4a4a;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+            background-color: #444444;
+        }
+
+        .btn-op {
+            background-color: #252526;
+            color: #90c238;
+        }
+
+        .btn-op:hover {
+            background-color: #2d3323;
+        }
+
+        .btn-action {
+            background-color: #332020;
+            color: #f44336;
+        }
+
+        .btn-action:hover {
+            background-color: #442525;
+        }
+
+        .btn-equals {
+            background-color: #90c238;
+            color: #181818;
+            font-weight: 700;
+        }
+
+        .btn-equals:hover {
+            background-color: #a2d645;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 0.75rem;
+            color: #555555;
+            background-color: #181818;
+            border-top: 1px solid #222222;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calc-container">
+        <!-- Encabezado con Logo de Grupo Mario Bravo y Alexander GMB -->
+        <div class="header">
+            <div class="brand-info">
+                <svg class="logo-svg" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 120 10 A 70 70 0 1 0 120 150 L 145 150 A 25 25 0 0 0 145 100 L 115 100 L 115 122 L 138 122 A 6 6 0 0 1 138 130 L 120 130 A 50 50 0 1 1 120 30 A 49.8 49.8 0 0 1 163 55 L 180 38 A 70 70 0 0 0 120 10 Z" fill="#90c238"/>
+                    <path d="M 120 30 A 50 50 0 1 0 163 125 L 145 108 A 28 28 0 1 1 120 52 Z" fill="#1b3022"/>
+                    <path d="M 60 70 Q 75 40 105 45 Q 90 70 80 100 Q 60 90 60 70 Z" fill="#ffffff"/>
+                    <path d="M 100 80 Q 130 75 145 100 Q 120 115 100 80 Z" fill="#ffffff"/>
+                </svg>
+                <div class="brand-text">
+                    <span class="user-title">Alexander GMB</span>
+                    <span class="company-subtitle">Grupo Mario Bravo</span>
+                </div>
+            </div>
+            <span class="mode-badge">JS App</span>
+        </div>
+
+        <!-- Pantalla de la Calculadora -->
+        <div class="display-area">
+            <div class="history" id="history"></div>
+            <div class="current-input" id="display">0</div>
+        </div>
+
+        <!-- Botones -->
+        <div class="keypad">
+            <button class="btn btn-action" onclick="clearAll()">AC</button>
+            <button class="btn btn-action" onclick="deleteLast()">DEL</button>
+            <button class="btn btn-op" onclick="appendOperator('%')">%</button>
+            <button class="btn btn-op" onclick="appendOperator('/')">÷</button>
+
+            <button class="btn" onclick="appendNumber('7')">7</button>
+            <button class="btn" onclick="appendNumber('8')">8</button>
+            <button class="btn" onclick="appendNumber('9')">9</button>
+            <button class="btn btn-op" onclick="appendOperator('*')">×</button>
+
+            <button class="btn" onclick="appendNumber('4')">4</button>
+            <button class="btn" onclick="appendNumber('5')">5</button>
+            <button class="btn" onclick="appendNumber('6')">6</button>
+            <button class="btn btn-op" onclick="appendOperator('-')">-</button>
+
+            <button class="btn" onclick="appendNumber('1')">1</button>
+            <button class="btn" onclick="appendNumber('2')">2</button>
+            <button class="btn" onclick="appendNumber('3')">3</button>
+            <button class="btn btn-op" onclick="appendOperator('+')">+</button>
+
+            <button class="btn" onclick="appendNumber('0')">0</button>
+            <button class="btn" onclick="appendNumber('.')">.</button>
+            <button class="btn btn-equals" style="grid-column: span 2;" onclick="calculate()">=</button>
+        </div>
+
+        <div class="footer">
+            Sistema de Cálculo • Alexander GMB
+        </div>
+    </div>
+
+    <script>
+        let currentInput = '0';
+        let historyText = '';
+        let shouldResetDisplay = false;
+
+        const displayEl = document.getElementById('display');
+        const historyEl = document.getElementById('history');
+
+        function updateDisplay() {
+            displayEl.textContent = currentInput;
+            historyEl.textContent = historyText;
+        }
+
+        function appendNumber(num) {
+            if (currentInput === '0' || shouldResetDisplay) {
+                currentInput = num;
+                shouldResetDisplay = false;
+            } else {
+                if (num === '.' && currentInput.includes('.')) return;
+                currentInput += num;
+            }
+            updateDisplay();
+        }
+
+        function appendOperator(op) {
+            if (shouldResetDisplay) shouldResetDisplay = false;
+            const lastChar = currentInput.slice(-1);
+            if (['+', '-', '*', '/', '%'].includes(lastChar)) {
+                currentInput = currentInput.slice(0, -1) + op;
+            } else {
+                currentInput += op;
+            }
+            updateDisplay();
+        }
+
+        function clearAll() {
+            currentInput = '0';
+            historyText = '';
+            shouldResetDisplay = false;
+            updateDisplay();
+        }
+
+        function deleteLast() {
+            if (shouldResetDisplay) {
+                clearAll();
+                return;
+            }
+            if (currentInput.length === 1) {
+                currentInput = '0';
+            } else {
+                currentInput = currentInput.slice(0, -1);
+            }
+            updateDisplay();
+        }
+
+        function calculate() {
+            try {
+                let expression = currentInput.replace(/×/g, '*').replace(/÷/g, '/');
+                let result = eval(expression);
+                
+                if (!isFinite(result)) {
+                    currentInput = 'Error';
+                } else {
+                    historyText = currentInput + ' =';
+                    currentInput = String(Number(result.toFixed(8)));
+                }
+            } catch (e) {
+                currentInput = 'Error';
+            }
+            shouldResetDisplay = true;
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+body{ 
+    background-color: #f1f1f5;
+    font-family:georgia,serif;
+     color: #000000;
+}
+h1{
+    color: #15bfc5;
+    font-size: 2,5rem;
+}
+header{
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #15bfc5;
+}
+nav a{
+    color: #0076fd;
+}
+main{
+    padding: 3rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.metodos-titulo{
+    font-size: 1.1rem;
+    letter-spacing: 0.05em; 
+    text-transform:uppercase;
+    margin-bottom:0.25rem;
+    color: #15c573;
+
+}
+.precio{
+    font-weight: bold;
+    color:#15c573;
+}
+#contador-tazas{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #15bfc5;
+}
+#boton-reservar{
+    display:block;
+    margin-top:1rem ;
+    padding:0.5rem 1,25rem ;
+    background-color: #15c573;
+    color: #000000;
+    border: none;
+    font-family:Georgia, serif ;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
